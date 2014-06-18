@@ -1,3 +1,4 @@
 db-host: localhost
 db-port: 27017
 db-name: mydb
+install: false

@@ -3,6 +3,10 @@
 <h1 class="page-header">Login</h1>
 
 
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info">{{ message }}</div>
+{% endfor %}
+
 {% if error != None %}
 <div class="alert alert-danger">
   Incorrect login/password
