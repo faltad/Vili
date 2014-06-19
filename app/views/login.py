@@ -4,8 +4,8 @@ from functools import wraps
 from flask import render_template, redirect, request, session, flash, url_for
 
 from app import app
-from db import db
 
+from models import user
 
 def requiresLogin(f):
     @wraps(f)
@@ -30,12 +30,12 @@ def try_login_page():
 
     error = True
     if "username" in request.form and "password" in request.form:
-        em = db.get_db()
-        user = em.users.find_one({'name' : request.form["username"] })
-        if user != None:
-            hashed = bcrypt.hashpw(request.form["password"].encode('utf-8'), user["password"].encode('utf-8'))
-            if hashed == user["password"].encode('utf-8'):
-                session['id'] = user["id"]
+        
+        curr_user = user.fetchOneUser(request.form["username"])
+        if curr_user != None:
+            hashed = bcrypt.hashpw(request.form["password"].encode('utf-8'), curr_user["password"].encode('utf-8'))
+            if hashed == curr_user["password"].encode('utf-8'):
+                session['id'] = curr_user["id"]
                 flash('You were logged in successfully!')
                 return redirect(url_for('index_page'))
 

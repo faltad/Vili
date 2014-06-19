@@ -9,7 +9,7 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-
+db = None
 
 def parse_file(filename):
     config = False
@@ -35,9 +35,16 @@ def parse_file(filename):
             return config
     return False;
 
-from . import views        
-
 config = parse_file("config/config.yml")
 if config != False:
     config["SECRET_KEY"] = "dev key"
     app.config.update(config)
+
+try :
+    db = MongoClient(app.config["db-host"], app.config["db-port"])
+    db = db[app.config["db-name"]]
+except:
+    print("Connection to the database refused.")
+
+
+from . import views        
