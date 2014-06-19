@@ -3,11 +3,5 @@
 {% for message in get_flashed_messages() %}
 <div class="alert alert-info">{{ message }}</div>
 {% endfor %}
-
-<ul>
-{% for entry in entries %}
-<li>{{ entry.name }} </li>
-{% endfor %}
-</ul>
-<a href="{{ url_for('logout_page') }}">Logout</a>
+To access the list of your invoices, please follow this <a href="{{ url_for('invoice_index_page') }}">link</a>.
 {% endblock %}

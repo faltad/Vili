@@ -7,11 +7,10 @@ from db import db
 from .login import requiresLogin
 from app import app
 
+from models import invoice
 
 @app.route('/')
 @requiresLogin
 def index_page():
-    em = db.get_db()
-    entries = em.users.find({}, {'name': 1})
-    return render_template('show_entries.html', entries=entries)
+    return render_template('dashboard.html')
 

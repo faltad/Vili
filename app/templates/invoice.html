@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="me">
+  <h3> Jean-Baptiste Poupon</h3>
+  <h4> Développeur Freelance </h4>
+  <p class="address">
+    5 allée Mozart - 
+    44000 Nantes - France - E.Mail: poupon.jb@gmail.com
+  </p>
+  <p class="legal">
+    Siret: 799 762 660 00044 -
+    Dispensé d'immatriculation au Registre du Commerce et des Sociétés et au Répertoire des Métiers.
+  </p>
+</div>
+<div>
+  <div class="invoice">
+    <h1>Facture n<span class="nb">o</span>{{ "%03d" | format(entry.id) }}</h1>
+    <div class="date">
+      Date: 02 juin 2014<br/>
+      Mode de règlement: virement<br/>
+      Date d'échéance: 02 juillet 2014<br/>
+      Taux des pénalités de retard: 12%
+    </div>
+  </div>
+  <div class="customer">
+    <h1>Name Company</h1>
+    20 avenue des Champ-Elysées,<br/>
+    75006 Paris<br/>
+    France  
+  </div>
+  <div class="clear"></div>
+  <div id="work">
+    <h2>{{entry.title }}</h2>
+    <table class="table table-striped">
+      <tr>
+	<th>Titre</th>
+	<th>Heures</th>
+	<th>Total HT (en €)</th>
+      </tr>
+      <tr>
+	<td>Script de mise à jour de la DB</td>
+	<td>6</td>
+	<td>330</td>
+      </tr>
+      <tr>
+	<td>Diverse modification pages de contenu et css</td>
+	<td>2</td>
+	<td>110</td>
+      </tr>
+    </table>
+    <div class="total">
+      Total HT: 440 €<br/>
+      T.V.A. non applicable ou exonérée, article 293 B du CGI.<br/>
+      Total net: 440 €
+    </div>
+  </div>
+</div>
+<div class="footer">
+  Jean-Baptiste Poupon - Siret 794 852 580 00011 - 5 allée Mozart - 
+  44000 Nantes - poupon.jb@gmail.com
+</div>
+{% endblock %}

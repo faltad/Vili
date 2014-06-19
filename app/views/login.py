@@ -1,8 +1,11 @@
+import bcrypt
 
 from functools import wraps
 from flask import render_template, redirect, request, session, flash, url_for
 
 from app import app
+from db import db
+
 
 def requiresLogin(f):
     @wraps(f)
@@ -27,8 +30,8 @@ def try_login_page():
 
     error = True
     if "username" in request.form and "password" in request.form:
-        db = get_db()
-        user = db.users.find_one({'name' : request.form["username"] })
+        em = db.get_db()
+        user = em.users.find_one({'name' : request.form["username"] })
         if user != None:
             hashed = bcrypt.hashpw(request.form["password"].encode('utf-8'), user["password"].encode('utf-8'))
             if hashed == user["password"].encode('utf-8'):

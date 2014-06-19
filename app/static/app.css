@@ -1,0 +1,66 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.label-inline {
+    float: left;
+    padding-right: 10px;
+}
+
+.legal {
+    font-size: small;
+}
+
+.nb {
+    vertical-align: top;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 25px;
+}
+
+.clear {
+    clear: both;
+}
+
+#work {
+    margin-top: 35px;
+}
+
+#work h2 {
+    font-size: 20px;
+}
+
+#work table {
+    margin: auto;
+}
+
+.total {
+    margin-top: 20px;
+    margin-left: 70%;
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.invoice {
+    float: left;
+}
+
+.customer {
+    float: right;
+    text-align: right;
+}
+
+.me {
+    margin: auto;
+    text-align: center;
+}
+
+.footer {
+    margin-top: 25px;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 10px;
+}

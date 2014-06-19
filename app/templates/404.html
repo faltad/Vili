@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Page Not Found</h1>
+<p>
+  Sorry but this page cannot be found. Either it does not exist or you do not have the proper access to it.
+</p>
+<p>
+  You can go back to the dashboard with this <a href="{{ url_for('index_page') }}">link</a>.
+</p>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info">{{ message }}</div>
+{% endfor %}
+<h1>Invoices</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Title</th>
+    <th>Last modified</th>
+    <th>Total sum</th>
+    <th>Actions</th>
+  </tr>
+  {% for entry in entries %}
+  <tr>
+    <td>{{ entry.title }}</td>
+    <td>Yesterday</td>
+    <td>4500</td>
+    <td>
+      <a href="{{ url_for('invoice_view_page', invoice_id=entry.id) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+Create new invoice : <a href="{{ url_for('invoice_new_page') }}">here</a> -
+<a href="{{ url_for('logout_page') }}">Logout</a>
+{% endblock %}

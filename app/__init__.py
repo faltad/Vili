@@ -1,7 +1,6 @@
 import yaml
 import os
 import sys
-import bcrypt
 
 from pymongo import MongoClient
 
