@@ -4,7 +4,6 @@ import pymongo
 from app import db
 
 def fetchUserInvoices(userId, nbInvoices = 10):
-    print(db)
     invoices = db.invoices.find({"userId" : userId}).limit(nbInvoices)
     return invoices
 
