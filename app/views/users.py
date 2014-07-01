@@ -6,25 +6,22 @@ from .login import requiresLogin
 from app import app
 
 from models import user
+from forms import userProfileForm
 
 @app.route('/profile', methods=['GET'])
 @requiresLogin
 def profile_page():
     profUser = user.fetchOneById(session["id"])
-    return render_template('profile.html', user=profUser, param=profUser)
+    form = userProfileForm.UserProfileForm()
+    return render_template('profile.html', user=profUser, form=form)
 
 
 @app.route('/profile', methods=['POST'])
 @requiresLogin
 def profile_update_page():
     profUser = user.fetchOneById(session["id"])
-    paramData = {
-        "surname" : profUser.surname,
-        "name" : profUser.name,
-        "title" : profUser.title
-        }
-    errors = {}
-    if "surname" in request.form:
-        paramData["surname"] = request.form["surname"]
-    return render_template('profile.html', user=profUser, param=paramData)
+    form = userProfileForm.UserProfileForm(request.form)
+    if form.validate():
+        profUser.update(form)
+    return render_template('profile.html', user=profUser, form=form)
 

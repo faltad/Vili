@@ -33,9 +33,9 @@ def try_login_page():
         
         curr_user = user.fetchOneUser(request.form["username"])
         if curr_user != None:
-            hashed = bcrypt.hashpw(request.form["password"].encode('utf-8'), curr_user["password"].encode('utf-8'))
-            if hashed == curr_user["password"].encode('utf-8'):
-                session['id'] = curr_user["id"]
+            hashed = bcrypt.hashpw(request.form["password"].encode('utf-8'), curr_user.password.encode('utf-8'))
+            if hashed == curr_user.password.encode('utf-8'):
+                session['id'] = curr_user.id
                 flash('You were logged in successfully!')
                 return redirect(url_for('index_page'))
 
