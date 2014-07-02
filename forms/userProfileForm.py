@@ -9,6 +9,6 @@ class UserProfileForm(Form):
     email = TextField('Email', [validators.Email()])
     siret = TextField('Siret', [siretValidator.siretValidator()])
     address = TextField('Address', [validators.Length(min=4, max=70)])
-    postcode = TextField('Postcode/City', [validators.Length(min=4, max=70)])
+    city = TextField('Postcode/City', [validators.Length(min=4, max=70)])
     country = TextField('Country', [validators.Length(min=4, max=70)])
     

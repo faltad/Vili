@@ -3,5 +3,6 @@
 {% for message in get_flashed_messages() %}
 <div class="alert alert-info">{{ message }}</div>
 {% endfor %}
-To access the list of your invoices, please follow this <a href="{{ url_for('invoice_index_page') }}">link</a>.
+To access the list of your invoices, please follow this <a href="{{ url_for('invoice_index_page') }}">link</a>.<br>
+The profile is accessible <a href="{{ url_for('profile_page') }}">here</a>.
 {% endblock %}

@@ -10,6 +10,13 @@ def fetchOneUser(login):
     user = User(dbUser, db)
     return user
 
+def fetchOneUserPerEmail(email):
+    dbUser = db.users.find_one({'email' : email })
+    if dbUser == None:
+        return None
+    user = User(dbUser, db)
+    return user
+
 def fetchOneById(idUser):
     dbUser = db.users.find_one({'id':idUser})
     if dbUser == None:
@@ -17,11 +24,27 @@ def fetchOneById(idUser):
     user = User(dbUser, db)
     return user
 
+def getNewUser():
+    dbInfos = db.users.find({}, {"id" : 1}).sort("id", -1)
+    if dbInfos == None:
+        newId = 1
+    else:
+        newId = int(dbInfos[0]["id"]) + 1
+    print(dbInfos[0])
+    print("ID:[%d]" % newId)
+    dbUser = dict({"id" : newId})
+    user = User(dbUser, db)
+    return user
+
 class User():
     def __init__(self, dbUser, db):
         self.id = dbUser["id"]
-        self.password = dbUser["password"]
         self.db = db
+
+        if "password" in dbUser:
+            self.password = dbUser["password"]
+        else:
+            self.password = ""
         if "surname" in dbUser:
             self.surname = dbUser["surname"]
         else:
@@ -55,13 +78,8 @@ class User():
         else:
             self.siret = ""
 
-    def update(self, formUser):
-        self.surname = formUser.surname.data
-        self.name = formUser.name.data
-        self.title = formUser.title.data
-        self.email = formUser.email.data
-        self.address = formUser.address.data
-        self.city = formUser.postcode.data
-        self.country = formUser.country.data
-        self.siret = formUser.siret.data
+    def update(self):
         db.users.update({ "id" : self.id }, { '$set' : { "surname" : self.surname, "name" : self.name, "title" : self.title, "email" : self.email, "address" : self.address, "city" : self.city, "country" : self.country, "siret" : self.siret }}, upsert = False)
+
+    def save(self):
+        db.users.insert({"id" : self.id, "email" : self.email, "password" : self.password})
