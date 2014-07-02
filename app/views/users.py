@@ -12,7 +12,7 @@ from forms import userProfileForm
 @requiresLogin
 def profile_page():
     profUser = user.fetchOneById(session["id"])
-    form = userProfileForm.UserProfileForm()
+    form = userProfileForm.UserProfileForm(obj=profUser)
     return render_template('profile.html', user=profUser, form=form)
 
 
