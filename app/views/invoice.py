@@ -5,6 +5,7 @@ from .login import requiresLogin
 from app import app
 
 from models import invoice
+from models import user
 
 @app.route('/invoice/')
 @requiresLogin
@@ -16,9 +17,10 @@ def invoice_index_page():
 @requiresLogin
 def invoice_view_page(invoice_id):
     entry = invoice.fetchOneUserInvoice(session["id"], invoice_id)
+    profUser = user.fetchOneById(session["id"])
     if entry == None:
         abort(404)
-    return render_template('invoice.html', entry=entry)
+    return render_template('invoice.html', entry=entry, user=profUser)
 
 @app.route('/invoice/new', methods=['GET'])
 @requiresLogin

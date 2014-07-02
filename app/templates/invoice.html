@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="me">
-  <h3> Jean-Baptiste Poupon</h3>
-  <h4> Développeur Freelance </h4>
+  <h3> {{ user.surname }} {{ user.name }}</h3>
+  <h4> {{ user.title }} </h4>
   <p class="address">
-    5 allée Mozart - 
-    44000 Nantes - France - E.Mail: poupon.jb@gmail.com
+    {{ user.address }} - 
+    {{ user.city }} - {{ user.country }} - E.Mail: {{ user.email }}
   </p>
   <p class="legal">
-    Siret: 799 762 660 00044 -
+    Siret: {{ user.siret }} -
     Dispensé d'immatriculation au Registre du Commerce et des Sociétés et au Répertoire des Métiers.
   </p>
 </div>
@@ -56,7 +56,7 @@
   </div>
 </div>
 <div class="footer">
-  Jean-Baptiste Poupon - Siret 794 852 580 00011 - 5 allée Mozart - 
-  44000 Nantes - poupon.jb@gmail.com
+  {{ user.surname }} {{ user.name }} - Siret {{ user.siret }} - {{ user.address }} - 
+  {{ user.city }} - {{ user.email }}
 </div>
 {% endblock %}
