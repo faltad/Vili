@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-info">{{ message }}</div>
+{% endfor %}
+<h1>Customers</h1>
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Actions</th>
+  </tr>
+  {% for entry in entries %}
+  <tr>
+    <td>{{ entry.name }}</td>
+    <td>
+      <a href="{{ url_for('invoice_view_page', invoice_id=entry.id) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+Create new customer : <a href="{{ url_for('customer_new_page') }}">here</a>
+{% endblock %}

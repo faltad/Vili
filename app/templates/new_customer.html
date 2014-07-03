@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+<h1>Create a new customer</h1>
+<form action="{{ url_for('customer_create_page') }}" method="POST">
+  <div class="form-horizontal col-md-6">
+    <div class="row">
+      <div class="form-group">
+	<label class="control-label col-md-3">Invoice number</label>
+	<div class="col-md-8">
+	  <input type="number" name="id" class="form-control" value="{{ new_id}}" min="{{new_id }}"/>
+	</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+	<label class="control-label col-md-3">Title</label>
+	<div class="col-md-8">
+	  <input type="text" name="title" class="form-control"/>
+	</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+	<label class="control-label col-md-3">Client</label>
+	<div class="col-md-8">
+	  <select name="client" class="form-control">
+	    <option>Select a client</option>
+	  </select>
+	</div>
+      </div>
+    </div>
+    <input type="submit" class="btn btn-default btn-xs" value="Save"/>
+  </div>
+</form>
+
+{% endblock %}

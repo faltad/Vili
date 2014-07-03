@@ -7,13 +7,13 @@ from app import app
 from models import invoice
 from models import user
 
-@app.route('/invoice/')
+@app.route('/invoices/')
 @requiresLogin
 def invoice_index_page():
     entries = invoice.fetchUserInvoices(session["id"])
     return render_template('list_invoices.html', entries=entries)
 
-@app.route('/invoice/<int:invoice_id>')
+@app.route('/invoices/<int:invoice_id>')
 @requiresLogin
 def invoice_view_page(invoice_id):
     entry = invoice.fetchOneUserInvoice(session["id"], invoice_id)
@@ -22,7 +22,7 @@ def invoice_view_page(invoice_id):
         abort(404)
     return render_template('invoice.html', entry=entry, user=profUser)
 
-@app.route('/invoice/new', methods=['GET'])
+@app.route('/invoices/new', methods=['GET'])
 @requiresLogin
 def invoice_new_page():
     entry = invoice.fetchHighestIdUser(session["id"])
@@ -32,7 +32,7 @@ def invoice_new_page():
         new_id = entry["id"] + 1
     return render_template('new_invoice.html', new_id=new_id, errors={})
 
-@app.route('/invoice/new', methods=['POST'])
+@app.route('/invoices/new', methods=['POST'])
 @requiresLogin
 def invoice_create_page():
     errors = {}
