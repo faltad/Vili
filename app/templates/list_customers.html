@@ -13,7 +13,8 @@
   <tr>
     <td>{{ entry.name }}</td>
     <td>
-      <a href="{{ url_for('invoice_view_page', invoice_id=entry.id) }}"><span class="glyphicon glyphicon-eye-open"></span></a>
+      <a href="{{ url_for('customer_edit_page', customer_id=entry.id) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+      <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
     </td>
   </tr>
   {% endfor %}

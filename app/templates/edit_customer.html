@@ -1,8 +1,33 @@
 {% extends "layout.html" %}
 {% from "_formhelpers.html" import render_field %}
 {% block body %}
-<h1>Create a new customer</h1>
-<form action="{{ url_for('customer_create_page') }}" method="POST">
+<h1>Edit an existing customer</h1>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-2">
+    <div class="row">
+      <div class="col-xs-6">
+	<strong>Name:</strong><br>
+	<strong>Address:</strong><br>
+	<strong>City/Postcode:</strong><br>
+	<strong>Country:</strong><br>
+      </div>
+      <div class="col-xs-6">
+	{{ customer.name }}<br>
+	{{ customer.address }}<br>
+	{{ customer.city }}<br>
+	{{ customer.country }}<br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<form action="{{ url_for('customer_update_page', customer_id=customer.id) }}" method="POST">
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+
   <div class="form-horizontal col-md-4 col-md-offset-2">
     <div class="form-group">
       {{ render_field(form.name, class="form-control", required="required") }}	

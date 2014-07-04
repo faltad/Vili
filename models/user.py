@@ -30,8 +30,6 @@ def getNewUser():
         newId = 1
     else:
         newId = int(dbInfos[0]["id"]) + 1
-    print(dbInfos[0])
-    print("ID:[%d]" % newId)
     dbUser = dict({"id" : newId})
     user = User(dbUser, db)
     return user
