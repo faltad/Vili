@@ -30,7 +30,7 @@ def try_login_page():
 
     error = True
     if "email" in request.form and "password" in request.form:
-        curr_user = user.fetchOneUserPerEmail(request.form["email"])
+        curr_user = user.fetchOneByEmail(request.form["email"])
         if curr_user != None:
             hashed = bcrypt.hashpw(request.form["password"].encode('utf-8'), curr_user.password.encode('utf-8'))
             if hashed == curr_user.password.encode('utf-8'):

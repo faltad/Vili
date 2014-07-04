@@ -3,14 +3,14 @@ import pymongo
 
 from app import db
 
-def fetchOneUser(login):
+def fetchOne(login):
     dbUser = db.users.find_one({'name' : login })
     if dbUser == None:
         return None
     user = User(dbUser, db)
     return user
 
-def fetchOneUserPerEmail(email):
+def fetchOneByEmail(email):
     dbUser = db.users.find_one({'email' : email })
     if dbUser == None:
         return None
@@ -24,12 +24,13 @@ def fetchOneById(idUser):
     user = User(dbUser, db)
     return user
 
-def getNewUser():
+def getNew():
     dbInfos = db.users.find({}, {"id" : 1}).sort("id", -1)
     if dbInfos == None:
         newId = 1
     else:
         newId = int(dbInfos[0]["id"]) + 1
+
     dbUser = dict({"id" : newId})
     user = User(dbUser, db)
     return user

@@ -25,7 +25,7 @@ def profile_update_page():
     form = userProfileForm.UserProfileForm(request.form)
     error = False
     if form.validate():
-        checkEmailUser = user.fetchOneUserPerEmail(form.email.data)
+        checkEmailUser = user.fetchOneByEmail(form.email.data)
         if checkEmailUser == None or session["id"] == checkEmailUser.id:
             form.populate_obj(profUser)
             profUser.update()
@@ -45,8 +45,8 @@ def create_account_page():
     error = False
     form = newUserForm.NewUserForm(request.form)
     if form.validate():
-        if user.fetchOneUserPerEmail(form.email.data) == None:
-            profUser = user.getNewUser()
+        if user.fetchOneByEmail(form.email.data) == None:
+            profUser = user.getNew()
             salt = bcrypt.gensalt()
             form.populate_obj(profUser)
             hashpw = bcrypt.hashpw(profUser.password.encode("utf-8"), salt)

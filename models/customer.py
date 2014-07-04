@@ -12,10 +12,6 @@ def fetchOne(userId, idCustomer):
     customer = Customer(data, db, userId)
     return customer
 
-def fetchHighestId(userId):
-    customer = db.customers.find_one({"userId" : userId}, { "id" : 1, "_id": 0}, sort=[("id", pymongo.DESCENDING)])
-    return customer
-
 def insert(userId, newId, title):
     db.customers.insert({"userId" : userId,
                         "id" : newId,
