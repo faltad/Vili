@@ -39,9 +39,11 @@ def invoice_create_page():
     entry = invoice.fetchHighestIdUser(session["id"])
     if "id" in request.form and "title" in request.form:
         if entry == None:
-            highest_id = 1
+            highest_id = 0
+        else:
+            highest_id = entry["id"]
         new_id = int(request.form["id"])
-        if entry["id"] >= new_id:
+        if highest_id >= new_id:
             errors["id"] = True
         if len(request.form["title"]) < 1:
             errors["title"] = True
@@ -51,10 +53,7 @@ def invoice_create_page():
     else:
         errors["total"] = True
 
-    if entry == None:
-        new_id = 1
-    else:
-        new_id = entry["id"] + 1
+    new_id = entry["id"] + 1
 
     return render_template('new_invoice.html', errors=errors, new_id = new_id)
 
